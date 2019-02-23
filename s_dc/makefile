@@ -7,8 +7,8 @@
 TARGET = nxglquake.elf
 BIN = nxglquake.bin
 FIRSTREAD = 1st_read.bin
-KOS_LOCAL_CFLAGS = -I../common/include -I../r_gl/include -Iinclude -O0 -DGLQUAKE
-LIBS = -lqgl
+KOS_LOCAL_CFLAGS = -I../common/include -I../r_gl/include -I$(KOS_BASE)/addons/GLdc -Iinclude -O0 -DGLQUAKE
+LIBS = -IGLdc
 
 CDRECORD_ID = ATAPI:0,0,0
 CDRECORD_DEV = /dev/hdc

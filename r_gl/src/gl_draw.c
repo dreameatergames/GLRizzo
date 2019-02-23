@@ -1184,11 +1184,7 @@ void GL_Upload8_EXT (byte *data, int width, int height,  qboolean mipmap, qboole
 
 	samples = 1; // alpha ? gl_alpha_format : gl_solid_format;
 // BlackAura - begin
-#ifdef	_arch_dreamcast
-	internal_fmt = alpha?GL_KOS_COLOR_INDEX8_WITHALPHA:GL_COLOR_INDEX8_EXT;
-#else
 	internal_fmt = GL_COLOR_INDEX8_EXT;
-#endif
 // BlackAura - end
 
 	texels += scaled_width * scaled_height;
