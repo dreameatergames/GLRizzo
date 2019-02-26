@@ -117,7 +117,8 @@ extern	cvar_t	chase_active;
 extern	cvar_t	chase_back;
 extern	cvar_t	chase_up;
 
-extern	cvar_t	r_stereo_separation;
+/* @TODO: r_stereo comment */
+/*extern	cvar_t	r_stereo_separation;*/
 extern	cvar_t	r_drawentities;
 extern	cvar_t	r_fullbright;
 extern	cvar_t	r_waterwarp;
@@ -413,8 +414,6 @@ qboolean	m_return_onerror;
 char		m_return_reason [32];
 
 
-// BlackAura (28-12-2002) - Alternate menu background fading
-void Draw_FadeScreen2 (int level);
 static int fade_level = 0;
 
 
@@ -2993,7 +2992,7 @@ void M_Developer_Draw (void)
 	M_DrawPlaque ("gfx/p_option.lmp", false);
 
 	M_Print (16, y+=8, "              Show FPS"); M_DrawCheckbox (220, y, cl_showfps.value);
-	M_Print (16, y+=8, "  3D stereo separation"); M_DrawSlider (220, y, (r_stereo_separation.value + 10.0) / 20.0);
+	//M_Print (16, y+=8, "  3D stereo separation"); M_DrawSlider (220, y, (r_stereo_separation.value + 10.0) / 20.0);
 	M_Print (16, y+=8, "                   fog"); M_DrawSlider (220, y, (developer.value-100.0)/255.0);
 	M_Print (16, y+=8, "        developer mode"); M_DrawCheckbox (220, y, developer.value);
 	M_Print (16, y+=8, "       registered mode"); M_DrawCheckbox (220, y, registered.value);
@@ -3021,7 +3020,7 @@ void M_Developer_Change (int dir)
 	S_LocalSound ("misc/menu3.wav");
 
 	if (c == i++) Cvar_SetValue ("cl_showfps", !cl_showfps.value);
-	if (c == i++) ChangeCVar("r_stereo_separation", r_stereo_separation.value, dir*0.5, -10.0, 10.0, true);
+	if (c == i++){}// ChangeCVar("r_stereo_separation", r_stereo_separation.value, dir*0.5, -10.0, 10.0, true);
 	if (c == i++) ChangeCVar("developer", developer.value, dir, 100, 355, false);
 	if (c == i++) Cvar_SetValue ("developer", !developer.value);
 	if (c == i++) Cvar_SetValue ("registered", !registered.value);
@@ -3234,7 +3233,7 @@ void M_Quit_f (void)
 {
 	M_PopUp_f (quitMessage, "quit"); // Manoel Kasimier
 }
-// fazer menu c/ opções de reiniciar o mapa atual, resetar o jogo, resetar o console
+// fazer menu c/ opï¿½ï¿½es de reiniciar o mapa atual, resetar o jogo, resetar o console
 // e sair pra BIOS
 // usar arch_reboot pra resetar o DC
 
@@ -3244,14 +3243,8 @@ void M_Quit_f (void)
 // BlackAura (28-12-2002) - Fade menu background
 void M_FadeBackground()
 {
-//	fade_level += 1; // Manoel Kasimier - edited
-//	if(fade_level > 20)
-		fade_level = 20;
-#ifndef _arch_dreamcast
+/* @TODO: figure out whhich Draw_FadeScreen() we want */
 	Draw_FadeScreen ();
-#else
-	Draw_FadeScreen2 (fade_level);
-#endif
 }
 
 void M_Draw (void)
@@ -3268,11 +3261,8 @@ void M_Draw (void)
 		//	if(fade_level < 0)
 				fade_level = 0;
 			scr_fullupdate = 1;
-#ifndef _arch_dreamcast
+			/* @TODO: figure out whhich Draw_FadeScreen() we want */
 			Draw_FadeScreen ();
-#else
-			Draw_FadeScreen2 (fade_level);
-#endif
 		}
 
 		return;

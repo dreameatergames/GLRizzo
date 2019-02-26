@@ -730,15 +730,16 @@ void R_BlendLightmaps (void)
 		{
 			lightmap_modified[i] = false;
 			theRect = &lightmap_rectchange[i];
-//			glTexImage2D (GL_TEXTURE_2D, 0, lightmap_bytes
-//			, BLOCK_WIDTH, BLOCK_HEIGHT, 0, 
-//			gl_lightmap_format, GL_UNSIGNED_BYTE, lightmaps+i*BLOCK_WIDTH*BLOCK_HEIGHT*lightmap_bytes);
-//			glTexImage2D (GL_TEXTURE_2D, 0, lightmap_bytes
-//				, BLOCK_WIDTH, theRect->h, 0, 
-//				gl_lightmap_format, GL_UNSIGNED_BYTE, lightmaps+(i*BLOCK_HEIGHT+theRect->t)*BLOCK_WIDTH*lightmap_bytes);
-			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, theRect->t, 
+			/* @TODO: uncommented the comments, commented the uncommented */
+			glTexImage2D (GL_TEXTURE_2D, 0, lightmap_bytes
+			, BLOCK_WIDTH, BLOCK_HEIGHT, 0, 
+			gl_lightmap_format, GL_UNSIGNED_BYTE, lightmaps+i*BLOCK_WIDTH*BLOCK_HEIGHT*lightmap_bytes);
+			glTexImage2D (GL_TEXTURE_2D, 0, lightmap_bytes
+				, BLOCK_WIDTH, theRect->h, 0, 
+				gl_lightmap_format, GL_UNSIGNED_BYTE, lightmaps+(i*BLOCK_HEIGHT+theRect->t)*BLOCK_WIDTH*lightmap_bytes);
+			/*(GL_TEXTURE_2D, 0, 0, theRect->t, 
 				BLOCK_WIDTH, theRect->h, gl_lightmap_format, GL_UNSIGNED_BYTE,
-				lightmaps+(i* BLOCK_HEIGHT + theRect->t) *BLOCK_WIDTH*lightmap_bytes);
+				lightmaps+(i* BLOCK_HEIGHT + theRect->t) *BLOCK_WIDTH*lightmap_bytes);*/
 			theRect->l = BLOCK_WIDTH;
 			theRect->t = BLOCK_HEIGHT;
 			theRect->h = 0;
@@ -1709,8 +1710,8 @@ void GL_BuildLightmaps (void)
 		lightmap_rectchange[i].w = 0;
 		lightmap_rectchange[i].h = 0;
 		GL_Bind(lightmap_textures + i);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexImage2D (GL_TEXTURE_2D, 0, lightmap_bytes
 		, BLOCK_WIDTH, BLOCK_HEIGHT, 0, 
 		gl_lightmap_format, GL_UNSIGNED_BYTE, lightmaps+i*BLOCK_WIDTH*BLOCK_HEIGHT*lightmap_bytes);

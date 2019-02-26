@@ -865,8 +865,8 @@ void V_CalcViewRoll (void)
 		v_dmg_time -= host_frametime;
 	}
 	// Manoel Kasimier - begin
-	// é menor que zero, então mudamos o v_dmg_time pra -666
-	// pra que o Vibration_Stop só seja ativado neste frame
+	// ï¿½ menor que zero, entï¿½o mudamos o v_dmg_time pra -666
+	// pra que o Vibration_Stop sï¿½ seja ativado neste frame
 	else if (v_dmg_time != -666.0) // hack to stop the vibration in this frame only
 	{
 		v_dmg_time = -666.0;
@@ -1066,8 +1066,8 @@ the entity origin, so any view position inside that will be valid
 ==================
 */
 extern vrect_t	scr_vrect;
-extern cvar_t r_stereo_separation; // Manoel Kasimier - stereo 3D
-extern int		r_stereo_side; // Manoel Kasimier - stereo 3D
+//extern cvar_t r_stereo_separation; // Manoel Kasimier - stereo 3D
+//extern int		r_stereo_side; // Manoel Kasimier - stereo 3D
 
 void V_RenderView (void)
 {
@@ -1083,8 +1083,9 @@ void V_RenderView (void)
 	}
 */ // Manoel Kasimier - removed - end
 
+	/* @TODO: Maybe Check if r_stereo can be used */
 	// Manoel Kasimier - stereo 3D - begin
-	if (r_stereo_separation.value)
+	/*if (r_stereo_separation.value)
 	{
 		extern void R_RenderView_ (void);
 		int			i;
@@ -1112,12 +1113,12 @@ void V_RenderView (void)
 		for (i=0 ; i<3 ; i++)
 			r_refdef.vieworg[i] = vieworg[i] + forward[i] - right[i]*r_stereo_separation.value + up[i];
 		R_PushDlights ();
-		R_RenderView_ ();
+		R_RenderView_ ();*/
 /*
 		scr_vrect.x -= (scr_vrect.width + 2);
 		scr_vrect.width = scr_vrect.width*2 + 2;
-*/		return;
-	}
+*/		//return;
+//	}
 	// Manoel Kasimier - stereo 3D - end
 
 	if (cl.intermission)

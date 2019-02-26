@@ -29,9 +29,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 unsigned short	paletteData[256];	// Copied from nxDoom
 unsigned short	d_8to16table[256];
 viddef_t		vid;				// global video state
-byte			*surfcache;			// BlackAura (15-08-2004) - Dynamically sized surface cache
+//byte			*surfcache;			// BlackAura (15-08-2004) - Dynamically sized surface cache
 // Manoel Kasimier - begin
-byte			*vid_buffer;
+//byte			*vid_buffer;
 int				basewidth, baseheight, screenheight, vram_offset=0, kos_vidmode, dcvidmode=1;
 
 void SelectVidMode ()

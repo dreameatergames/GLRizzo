@@ -30,16 +30,17 @@ cvar_t	sw_stipplealpha = {"sw_stipplealpha","0", true}; // must be present in GL
 cvar_t	r_sprite_addblend = {"r_sprite_addblend","0", true};
 
 // Manoel Kasimier - screen positioning - begin
-#ifdef _arch_dreamcast
+/* @TODO: Figure out if screen positioning needed */
+/*#ifdef _arch_dreamcast
 cvar_t		scr_left	= {"scr_left",	"4", true};		// 12 pixels in 320x240 (2.5 = 8)
 cvar_t		scr_right	= {"scr_right",	"4", true};		// 12 pixels in 320x240 (2.5 = 8)
 cvar_t		scr_top		= {"scr_top",	"5", true};		// 12 pixels in 320x240
 cvar_t		scr_bottom	= {"scr_bottom","8.5", true};	// 20 pixels in 320x240
-#else
+#else*/
 cvar_t		scr_left	= {"scr_left",	"1", true};
 cvar_t		scr_right	= {"scr_right",	"1", true};
 cvar_t		scr_top		= {"scr_top",	"1", true};
 cvar_t		scr_bottom	= {"scr_bottom","1", true};
-#endif
+//#endif
 // Manoel Kasimier - screen positioning - end
 // Manoel Kasimier - end
