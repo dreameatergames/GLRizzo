@@ -937,7 +937,7 @@ Host_Init
 */
 pixel_t colormap_cel[256*64]; // Manoel Kasimier - EF_CELSHADING
 void M_Credits_f (void); // Manoel Kasimier
-void SCR_Adjust (void); // Manoel Kasimier - screen positioning
+//void SCR_Adjust (void); // Manoel Kasimier - screen positioning
 void Host_Init (quakeparms_t *parms)
 {
 	loadedfile_t	*fileinfo;	// 2001-09-12 Returning information about loaded file by Maddes
@@ -1067,7 +1067,7 @@ void Host_Init (quakeparms_t *parms)
 
 	Con_DPrintf ("\n"); // Manoel Kasimier
 
-	SCR_Adjust(); // Manoel Kasimier - screen positioning
+	//SCR_Adjust(); // Manoel Kasimier - screen positioning
 	M_Credits_f(); // Manoel Kasimier
 //	Cbuf_InsertText ("exec quake.rc\n"); // Manoel Kasimier - moved to menu.c
 

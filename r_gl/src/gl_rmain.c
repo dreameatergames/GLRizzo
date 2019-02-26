@@ -928,7 +928,16 @@ void R_SetupGL (void)
     glRotatef (-r_refdef.viewangles[1],  0, 0, 1);
     glTranslatef (-r_refdef.vieworg[0],  -r_refdef.vieworg[1],  -r_refdef.vieworg[2]);
 
-	glGetFloatv (GL_MODELVIEW_MATRIX, r_world_matrix);
+	//glGetFloatv (GL_MODELVIEW_MATRIX, r_world_matrix);
+	
+    gluPerspective(45.0f,(GLfloat)640/(GLfloat)480,0.1f,100.0f);	// Calculate The Aspect Ratio Of The Window
+
+    glMatrixMode(GL_MODELVIEW);
+
+	glDepthFunc(GL_LESS);				// The Type Of Depth Test To Do
+    glEnable(GL_DEPTH_TEST);			// Enables Depth Testing
+    glShadeModel(GL_SMOOTH);			// Enables Smooth Color Shading
+
 
 	//
 	// set drawing parms
@@ -1107,6 +1116,8 @@ r_refdef must be set before the first call
 */
 void R_RenderView (void)
 {
+	/* @TODO: glFinish() calls, nopped */
+
 	double	time1, time2;
 	GLfloat colors[4] = {(GLfloat) 0.0, (GLfloat) 0.0, (GLfloat) 1, (GLfloat) 0.20};
 
@@ -1118,7 +1129,7 @@ void R_RenderView (void)
 
 	if (r_speeds.value)
 	{
-		glFinish ();
+		//glFinish ();
 		time1 = Sys_FloatTime ();
 		c_brush_polys = 0;
 		c_alias_polys = 0;
@@ -1126,8 +1137,8 @@ void R_RenderView (void)
 
 	mirror = false;
 
-	if (gl_finish.value)
-		glFinish ();
+	if (gl_finish.value) {}
+		//glFinish ();
 
 	R_Clear ();
 

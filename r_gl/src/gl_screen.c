@@ -575,6 +575,9 @@ SCR_ScreenShot_f
 */  
 void SCR_ScreenShot_f (void) 
 {
+	/* @TODO: Screenshots */
+	return; 
+	/*
 	byte		*buffer;
 	char		pcxname[80]; 
 	char		checkname[MAX_OSPATH];
@@ -621,7 +624,7 @@ void SCR_ScreenShot_f (void)
 	COM_WriteFile (pcxname, buffer, glwidth*glheight*3 + 18 );
 
 	free (buffer);
-	Con_Printf ("Wrote %s\n", pcxname);
+	Con_Printf ("Wrote %s\n", pcxname);*/
 } 
 
 
@@ -878,7 +881,8 @@ void SCR_UpdateScreen (void)
 	}
 	else if (cl.intermission == 1 && key_dest == key_game)
 	{
-		Sbar_IntermissionOverlay ();
+		/* @TODO: is this defined somewhere? */
+		//Sbar_IntermissionOverlay ();
 	}
 	else if (cl.intermission == 2 && key_dest == key_game)
 	{
@@ -892,7 +896,7 @@ void SCR_UpdateScreen (void)
 		
 		SCR_DrawRam ();
 		SCR_DrawNet ();
-		SCR_DrawTurtle ();
+		//SCR_DrawTurtle ();
 		SCR_DrawPause ();
 		SCR_CheckDrawCenterString ();
 		Sbar_Draw ();

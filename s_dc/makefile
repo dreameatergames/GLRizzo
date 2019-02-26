@@ -7,8 +7,8 @@
 TARGET = nxglquake.elf
 BIN = nxglquake.bin
 FIRSTREAD = 1st_read.bin
-KOS_LOCAL_CFLAGS = -I../common/include -I../r_gl/include -I$(KOS_BASE)/addons/GLdc -Iinclude -O0 -DGLQUAKE
-LIBS = -IGLdc
+KOS_LOCAL_CFLAGS += -I../common/include -I../r_gl/include -Iinclude -O2 -DGLQUAKE
+LIBS = -lGLdc -lz
 
 CDRECORD_ID = ATAPI:0,0,0
 CDRECORD_DEV = /dev/hdc
@@ -19,16 +19,16 @@ COMMON_OBJS += common.o console.o crc.o cvar.o host.o host_cmd.o
 COMMON_OBJS += keys.o mathlib.o menu.o net_loop.o net_main.o net_vcr.o
 COMMON_OBJS += nonintel.o pr_cmds.o pr_edict.o pr_exec.o r_part.o sbar.o
 COMMON_OBJS += sv_main.o sv_move.o sv_phys.o sv_user.o view.o wad.o
-COMMON_OBJS += world.o zone.o
+COMMON_OBJS += world.o zone.o r_2d.o
 
 # Uncomment this when we have a working sound driver
-#COMMON_OBJS += snd_dma.o snd_mem.o snd_mix.o
+COMMON_OBJS += snd_dma.o snd_mem.o snd_mix.o
 
 # OpenGL rendering version
-GL_OBJS = gl_draw.o gl_mesh.o gl_model.o gl_refrag.o gl_rlight.o gl_rmain.o gl_rmisc.o gl_rsurf.o gl_screen.o gl_warp.o
+GL_OBJS = gl_draw.o gl_mesh.o gl_model.o gl_refrag.o gl_rlight.o gl_rmain.o gl_rmisc.o gl_rsurf.o gl_screen.o gl_warp.o 
 
 # System specific stuff
-SYS_OBJS = cd_dc.o in_dc.o net_dc.o snd_dc.o sys_dc.o vid_dcgl.o
+SYS_OBJS = cd_dc.o in_dc.o net_dc.o snd_dc.o sys_dc.o vid_dcgl.o dc_vmu.o dc_vibe.o dc_menu.o
 
 OBJS = $(COMMON_OBJS) $(GL_OBJS) $(SYS_OBJS)
 
@@ -53,6 +53,9 @@ $(TARGET): $(OBJS)
 	$(KOS_CC) $(KOS_CFLAGS) $(KOS_LOCAL_CFLAGS) $(OPT_FLAGS) -c $< -o $@
 
 %.o: ../r_gl/src/%.c
+	$(KOS_CC) $(KOS_CFLAGS) $(KOS_LOCAL_CFLAGS) $(OPT_FLAGS) -c $< -o $@
+
+%.o: ../r_common/src/%.c
 	$(KOS_CC) $(KOS_CFLAGS) $(KOS_LOCAL_CFLAGS) $(OPT_FLAGS) -c $< -o $@
 
 # Run over serial or network connection

@@ -92,8 +92,8 @@ void R_InitParticleTexture (void)
 
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 /*
@@ -105,6 +105,10 @@ Grab six views for environment mapping tests
 */
 void R_Envmap_f (void)
 {
+
+	/* @TODO: env mapping broken */
+	return;
+	/*
 	byte	buffer[256*256*4];
 	char	name[1024];
 
@@ -160,7 +164,7 @@ void R_Envmap_f (void)
 	envmap = false;
 	glDrawBuffer  (GL_BACK);
 	glReadBuffer  (GL_BACK);
-	GL_EndRendering ();
+	GL_EndRendering ();*/
 }
 
 /*
@@ -366,8 +370,8 @@ void R_TranslatePlayerSkin (int playernum)
 	glTexImage2D (GL_TEXTURE_2D, 0, gl_solid_format, scaled_width, scaled_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 #endif
 */ // BlackAura - removed - end
 }
@@ -426,13 +430,15 @@ For program optimization
 */
 void R_TimeRefresh_f (void)
 {
+	/* @TODO: glFinish() & glDrawBuffer() calls, nopped */
+
 	int			i;
 	float		start, stop, time;
 	int			startangle;
 	vrect_t		vr;
 
-	glDrawBuffer  (GL_FRONT);
-	glFinish ();
+	//glDrawBuffer  (GL_FRONT);
+	//glFinish ();
 
 	start = Sys_FloatTime ();
 	for (i=0 ; i<128 ; i++)
@@ -441,12 +447,12 @@ void R_TimeRefresh_f (void)
 		R_RenderView ();
 	}
 
-	glFinish ();
+	//glFinish ();
 	stop = Sys_FloatTime ();
 	time = stop-start;
 	Con_Printf ("%f seconds (%f fps)\n", time, 128/time);
 
-	glDrawBuffer  (GL_BACK);
+	//glDrawBuffer  (GL_BACK);
 	GL_EndRendering ();
 }
 
